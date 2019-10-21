@@ -9,4 +9,5 @@ public interface ListService<L, T>{
     void writeToXmlFile(L l) throws FileNotFoundException;
     L reverseEntities(L l);
     Map charCharacteristic(L l);
+    T findSubElement(L l, T t);
 }

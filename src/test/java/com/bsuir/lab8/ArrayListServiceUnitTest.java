@@ -83,5 +83,19 @@ public class ArrayListServiceUnitTest {
         assertEquals(result, characteristic);
     }
 
+    @Test
+    public void findSubElement() {
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        list.add("ели");
+        list.add("вареники");
+        assertEquals("вареники", service.findSubElement(list, "ре"));
+        assertEquals("эники", service.findSubElement(list, "и"));
+        assertEquals("беники", service.findSubElement(list, "беники"));
+        assertEquals("ели", service.findSubElement(list, "ел"));
+        assertEquals("", service.findSubElement(list, "."));
+
+    }
 
 }

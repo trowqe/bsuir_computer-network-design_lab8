@@ -45,6 +45,17 @@ public class ArrayListService implements ListService<ArrayList, String> {
         return characteristics;
     }
 
+    @Override
+    public String findSubElement(ArrayList arrayList, String s) {
+        try {
+            String result = (String) arrayList.stream().filter(str -> str.toString().contains(s)).findFirst().get();
+            return result;
+        } catch (NoSuchElementException e) {
+            return "";
+        }
+    }
+
+
     private void countCharsInString(String s, HashMap<Character, Integer> map) {
         for (int i = 0; i < s.length(); i++) {
             if (map.containsKey(s.charAt(i))) {
@@ -54,4 +65,6 @@ public class ArrayListService implements ListService<ArrayList, String> {
             }
         }
     }
+
+
 }
