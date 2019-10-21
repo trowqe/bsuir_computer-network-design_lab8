@@ -10,4 +10,5 @@ public interface ListService<L, T>{
     L reverseEntities(L l);
     Map charCharacteristic(L l);
     T findSubElement(L l, T t);
+    L readFromFileToListAndSout(String filePath);
 }

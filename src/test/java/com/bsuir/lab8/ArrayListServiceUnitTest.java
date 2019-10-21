@@ -95,7 +95,16 @@ public class ArrayListServiceUnitTest {
         assertEquals("беники", service.findSubElement(list, "беники"));
         assertEquals("ели", service.findSubElement(list, "ел"));
         assertEquals("", service.findSubElement(list, "."));
+    }
 
+    @Test
+    public void readFromFileToList(){
+      service.readFromFileToListAndSout("src/main/resources/text.txt");
+    }
+
+    @Test
+    public void readFromNotExistingFileToList(){
+        assertEquals(Collections.EMPTY_LIST, service.readFromFileToListAndSout("lalalalololo"));
     }
 
 }

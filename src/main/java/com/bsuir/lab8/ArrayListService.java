@@ -2,20 +2,21 @@ package com.bsuir.lab8;
 
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ArrayListService implements ListService<ArrayList, String> {
+public class ArrayListService implements ListService<List, String> {
 
     @Override
-    public void defaultAdd(ArrayList arrayList, String s) {
+    public void defaultAdd(List arrayList, String s) {
         arrayList.add(s);
     }
 
     @Override
-    public int countEqualsElements(ArrayList arrayList) {
+    public int countEqualsElements(List arrayList) {
         Set set = (Set) arrayList.stream()
                 .collect(Collectors.toSet());
         return
@@ -24,7 +25,7 @@ public class ArrayListService implements ListService<ArrayList, String> {
     }
 
     @Override
-    public void writeToXmlFile(ArrayList arrayList) throws FileNotFoundException {
+    public void writeToXmlFile(List arrayList) throws FileNotFoundException {
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(
                 new FileOutputStream("arrayList.xml")));
         e.writeObject(arrayList);
@@ -32,27 +33,44 @@ public class ArrayListService implements ListService<ArrayList, String> {
     }
 
     @Override
-    public ArrayList reverseEntities(ArrayList arrayList) {
+    public List reverseEntities(List arrayList) {
         return (ArrayList) arrayList.stream()
                 .map(s -> new StringBuffer((String) s).reverse().toString())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map charCharacteristic(ArrayList arrayList) {
+    public Map charCharacteristic(List arrayList) {
         HashMap<Character, Integer> characteristics = new HashMap<>();
         arrayList.forEach(s -> countCharsInString(s.toString(), characteristics));
         return characteristics;
     }
 
     @Override
-    public String findSubElement(ArrayList arrayList, String s) {
+    public String findSubElement(List arrayList, String s) {
         try {
             String result = (String) arrayList.stream().filter(str -> str.toString().contains(s)).findFirst().get();
             return result;
         } catch (NoSuchElementException e) {
             return "";
         }
+    }
+
+    @Override
+    public List readFromFileToListAndSout(String filePath) {
+        try {
+            Scanner s = new Scanner(new File(filePath));
+            ArrayList<String> list = new ArrayList<String>();
+            while (s.hasNext()) {
+                list.add(s.nextLine());
+            }
+            s.close();
+            list.forEach(str->System.out.println(str));
+            return list;
+        } catch (FileNotFoundException e) {
+            return Collections.EMPTY_LIST;
+        }
+
     }
 
 
