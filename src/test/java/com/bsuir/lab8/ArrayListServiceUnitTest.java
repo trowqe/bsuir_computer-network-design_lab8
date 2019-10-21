@@ -4,10 +4,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
@@ -48,5 +45,22 @@ public class ArrayListServiceUnitTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void reverseEntities(){
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        list.add("ели");
+        List result = new ArrayList<String>();
+        result.add("икинэ");
+        result.add("икинеб");
+        result.add("иле");
+
+        ArrayList<String> reversed = (ArrayList<String>) service.reverseEntities(list);
+        assertEquals(result, reversed);
+    }
+
+
 
 }

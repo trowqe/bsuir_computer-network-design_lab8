@@ -10,10 +10,12 @@ import java.util.stream.Collectors;
 
 public class ArrayListService implements ListService<ArrayList, String> {
 
+    @Override
     public void defaultAdd(ArrayList arrayList, String s) {
         arrayList.add(s);
     }
 
+    @Override
     public int countEqualsElements(ArrayList arrayList) {
         Set set = (Set) arrayList.stream()
                 .collect(Collectors.toSet());
@@ -28,5 +30,12 @@ public class ArrayListService implements ListService<ArrayList, String> {
                 new FileOutputStream("arrayList.xml")));
         e.writeObject(arrayList);
         e.close();
+    }
+
+    @Override
+    public ArrayList reverseEntities(ArrayList arrayList) {
+        return (ArrayList) arrayList.stream()
+                .map(s -> new StringBuffer((String) s).reverse().toString())
+                .collect(Collectors.toList());
     }
 }
