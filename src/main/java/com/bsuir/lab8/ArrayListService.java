@@ -73,6 +73,11 @@ public class ArrayListService implements ListService<List, String> {
 
     }
 
+    @Override
+    public int compareInnerObjects(List list, int firstIndex, int secondIndex) {
+            return list.get(firstIndex).toString().compareTo(list.get(secondIndex).toString());
+    }
+
 
     private void countCharsInString(String s, HashMap<Character, Integer> map) {
         for (int i = 0; i < s.length(); i++) {

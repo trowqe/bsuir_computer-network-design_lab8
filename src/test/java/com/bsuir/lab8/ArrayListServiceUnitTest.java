@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -98,13 +99,31 @@ public class ArrayListServiceUnitTest {
     }
 
     @Test
-    public void readFromFileToList(){
-      service.readFromFileToListAndSout("src/main/resources/text.txt");
+    public void readFromFileToList() {
+        service.readFromFileToListAndSout("src/main/resources/text.txt");
     }
 
     @Test
-    public void readFromNotExistingFileToList(){
+    public void readFromNotExistingFileToList() {
         assertEquals(Collections.EMPTY_LIST, service.readFromFileToListAndSout("lalalalololo"));
+    }
+
+    @Test
+    public void compareInnerObjects() {
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        list.add("беники");
+        list.add("ели");
+        assertEquals(0, service.compareInnerObjects(list, 1, 2));
+        assertTrue(service.compareInnerObjects(list, 1, 0) < 0);
+        assertTrue(service.compareInnerObjects(list, 0, 2) > 0);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void compareInnerObjectsNotExistingIndexes() {
+        List list = new ArrayList();
+        service.compareInnerObjects(list, 1, 2);
     }
 
 }
