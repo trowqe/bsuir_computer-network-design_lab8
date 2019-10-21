@@ -47,7 +47,7 @@ public class ArrayListServiceUnitTest {
     }
 
     @Test
-    public void reverseEntities(){
+    public void reverseEntities() {
         List list = new ArrayList<String>();
         list.add("эники");
         list.add("беники");
@@ -61,6 +61,27 @@ public class ArrayListServiceUnitTest {
         assertEquals(result, reversed);
     }
 
+    @Test
+    public void charCharacteristic() {
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        list.add("ели");
+        list.add("вареники");
+        Map result = new HashMap<Character, Integer>();
+        result.put('а', 1);
+        result.put('р', 1);
+        result.put('б', 1);
+        result.put('в', 1);
+        result.put('е', 3);
+        result.put('и', 7);
+        result.put('к', 3);
+        result.put('л', 1);
+        result.put('э', 1);
+        result.put('н', 3);
+        Map characteristic = service.charCharacteristic(list);
+        assertEquals(result, characteristic);
+    }
 
 
 }

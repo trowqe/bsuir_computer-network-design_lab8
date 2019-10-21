@@ -4,8 +4,7 @@ import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ArrayListService implements ListService<ArrayList, String> {
@@ -37,5 +36,22 @@ public class ArrayListService implements ListService<ArrayList, String> {
         return (ArrayList) arrayList.stream()
                 .map(s -> new StringBuffer((String) s).reverse().toString())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map charCharacteristic(ArrayList arrayList) {
+        HashMap<Character, Integer> characteristics = new HashMap<>();
+        arrayList.forEach(s -> countCharsInString(s.toString(), characteristics));
+        return characteristics;
+    }
+
+    private void countCharsInString(String s, HashMap<Character, Integer> map) {
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                map.put(s.charAt(i), map.get(s.charAt(i)) + 1);
+            } else {
+                map.put(s.charAt(i), 1);
+            }
+        }
     }
 }
