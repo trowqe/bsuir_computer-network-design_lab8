@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ArrayListServiceUnitTest {
-    ListService service = new ArrayListService();
+    ArrayListService service = new ArrayListService();
 
     @Test
     public void defaultAdd() {
@@ -124,6 +124,15 @@ public class ArrayListServiceUnitTest {
     public void compareInnerObjectsNotExistingIndexes() {
         List list = new ArrayList();
         service.compareInnerObjects(list, 1, 2);
+    }
+
+    @Test
+    public void countLengthOfElements(){
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        list.add("ели");
+        System.out.println(service.countLengthOfElements(list));
     }
 
 }

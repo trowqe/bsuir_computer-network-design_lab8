@@ -20,4 +20,5 @@ public interface ListService<L, T> {
 
     int compareInnerObjects(L l, int firstIndex, int secondIndex);
 
+
 }

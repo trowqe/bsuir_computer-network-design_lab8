@@ -65,7 +65,7 @@ public class ArrayListService implements ListService<List, String> {
                 list.add(s.nextLine());
             }
             s.close();
-            list.forEach(str->System.out.println(str));
+            list.forEach(str -> System.out.println(str));
             return list;
         } catch (FileNotFoundException e) {
             return Collections.EMPTY_LIST;
@@ -75,9 +75,13 @@ public class ArrayListService implements ListService<List, String> {
 
     @Override
     public int compareInnerObjects(List list, int firstIndex, int secondIndex) {
-            return list.get(firstIndex).toString().compareTo(list.get(secondIndex).toString());
+        return list.get(firstIndex).toString().compareTo(list.get(secondIndex).toString());
     }
 
+    public Map countLengthOfElements(List list) {
+        return (HashMap<String, Integer>) list.stream()
+                .collect(Collectors.toMap(i -> i, i -> i.toString().length()));
+    }
 
     private void countCharsInString(String s, HashMap<Character, Integer> map) {
         for (int i = 0; i < s.length(); i++) {
