@@ -24,7 +24,6 @@ public class ArrayListServiceUnitTest {
         Mockito.verify(list).add(anyString());
     }
 
-
     @Test
     public void countEqualsElements() {
         Set set = new HashSet<String>();
@@ -32,6 +31,7 @@ public class ArrayListServiceUnitTest {
         when(list.stream()).thenReturn(Stream.empty());
         assertEquals(0, service.countEqualsElements(list));
     }
+
 
     @Test
     public void writeToXmlFile() {
@@ -45,6 +45,29 @@ public class ArrayListServiceUnitTest {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void countEqualsElementsDoNotHaveEquals() {
+        List list = new ArrayList<String>();
+        list.add("one");
+        list.add("two");
+        list.add("three");
+        assertEquals(0, service.countEqualsElements(list));
+    }
+
+    @Test
+    public void countEqualsElementsFiveEquals() {
+        List list = new ArrayList<String>();
+        list.add("one");
+        list.add("one");
+        list.add("one");
+        list.add("two");
+        list.add("two");
+        list.add("two");
+        list.add("two");
+        list.add("three");
+        assertEquals(5, service.countEqualsElements(list));
     }
 
     @Test
@@ -133,6 +156,29 @@ public class ArrayListServiceUnitTest {
         list.add("беники");
         list.add("ели");
         System.out.println(service.countLengthOfElements(list));
+    }
+
+    @Test
+    public void addAsInQueue() {
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        service.addAsInQueue(list, 3, "sd");
+        assertEquals(3, list.size());
+        service.addAsInQueue(list, 3, "sd");
+        assertEquals(3, list.size());
+        service.addAsInQueue(list, 3, "sd");
+        assertEquals(3, list.size());
+        service.addAsInQueue(list, 3, "sd");
+        assertEquals(3, list.size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addAsInQueueWrongArgs() {
+        List list = new ArrayList<String>();
+        list.add("эники");
+        list.add("беники");
+        service.addAsInQueue(list, 1, "sd");
     }
 
 }

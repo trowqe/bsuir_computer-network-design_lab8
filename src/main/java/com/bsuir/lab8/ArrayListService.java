@@ -39,14 +39,14 @@ public class ArrayListService implements ListService<List, String> {
                 .collect(Collectors.toList());
     }
 
-    @Override
+
     public Map charCharacteristic(List arrayList) {
         HashMap<Character, Integer> characteristics = new HashMap<>();
         arrayList.forEach(s -> countCharsInString(s.toString(), characteristics));
         return characteristics;
     }
 
-    @Override
+
     public String findSubElement(List arrayList, String s) {
         try {
             String result = (String) arrayList.stream().filter(str -> str.toString().contains(s)).findFirst().get();
@@ -76,6 +76,16 @@ public class ArrayListService implements ListService<List, String> {
     @Override
     public int compareInnerObjects(List list, int firstIndex, int secondIndex) {
         return list.get(firstIndex).toString().compareTo(list.get(secondIndex).toString());
+    }
+
+    @Override
+    public void addAsInQueue(List list, int capacity, String s) {
+        if (list.size() < capacity) {
+            list.add(s);
+        } else if (list.size() == capacity) {
+            list.add(s);
+            list.remove(0);
+        } else throw new IllegalArgumentException("list size more than capacity");
     }
 
     public Map countLengthOfElements(List list) {
